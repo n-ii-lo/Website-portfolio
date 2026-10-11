@@ -1,0 +1,29 @@
+---
+// Image or video from the content, or a placeholder that says what should be shown.
+import { imageSrc, inline, type Image } from '../lib/content';
+import { config } from '../site.config';
+interface Props { image?: Image; note?: string; alt?: string; fallback: string; class?: string; eager?: boolean }
+const { image, note, alt = '', fallback, class: cls, eager } = Astro.props;
+const src = imageSrc(image);
+const isVideo = !!src && /\.(mp4|webm)$/i.test(src);
+---
+{src ? (
+  isVideo
+    ? <video class:list={['media', cls]} src={src} autoplay muted loop playsinline preload="metadata" aria-label={alt}></video>
+    : <img class:list={['media', cls]} src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" data-zoom />
+) : (
+  <div class:list={['ph', cls]} role="img" aria-label={alt || note || fallback}>
+    {config.showMarkers && <span class="mono">{fallback}</span>}
+    {config.showMarkers && note && <span class="ph-note" set:html={inline(note)} />}
+  </div>
+)}
+
+<style>
+  .media { width: 100%; }
+  .ph {
+    width: 100%; min-height: 200px; height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px;
+    padding: 24px; text-align: center; background: var(--bg-alt);
+  }
+  .ph-note { color: var(--muted); font-size: 14px; max-width: 54ch; line-height: 1.5; }
+</style>
