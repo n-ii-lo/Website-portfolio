@@ -8,6 +8,7 @@
 | Скриншоты референса с подписями | [docs/reference/](docs/reference/README.md) |
 | Правила для LLM-разработчика | [AGENTS.md](AGENTS.md) |
 | Контент и его формат | [content/](content/README.md) |
+| Разбор старого сайта на Framer | [docs/OLD-SITE.md](docs/OLD-SITE.md) |
 | Старый сайт v0.1 (Astro) | ветка `main`, ветка `legacy-v0.1`, описание в [docs/legacy-v0.1/](docs/legacy-v0.1/README.md) |
 
 ## Как идёт работа
